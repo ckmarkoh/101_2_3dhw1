@@ -8,6 +8,10 @@ int main (int argc, char *argv[]){
 		string temp(argv[2]);
 	}
 	rasmgr->parser(argv[1]);
+	rasmgr->normalize();
+	rasmgr->debug();
+	rasmgr->drawTriangle();
+	rasmgr->drawBitMap();
 	return 0;
 }
 

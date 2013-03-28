@@ -28,6 +28,8 @@ vector<string> Rasmgr::parse_line(string line){
 	return vstr;
 }
 void Rasmgr::parser(char * filename){
+	int count_temp;
+	int* count_list = new int[3];
 	READ_STATUS rstatus=R_TYPE;
 	READ_TYPE rtype=T_VERTEX;
 	string line;
@@ -104,6 +106,9 @@ void Rasmgr::parser(char * filename){
 	else{
 		cout << "Unable to open file"; 
 	}
+
+}
+void Rasmgr::debug(){
 	if(_vertex_list.size()>0){
 		cout<<"Vertices"<<endl;
 		cout<<_vertex_list.size()<<endl;;

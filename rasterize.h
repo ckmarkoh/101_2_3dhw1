@@ -27,32 +27,48 @@ class Color;
 
 class Vertex{
 public:
+//	friend class Rasmgr;
 	Vertex(){}
-	Vertex(float x,float y,float z):_x(x),_y(y),_z(z){ 
+	Vertex(float x,float y,float z){
+		_x = new float[3];
+		_x[0]=x;
+		_x[1]=y;
+		_x[2]=z;
 	}
 	void print(){
-		printf("%d\t%d\t%d\t\n",(int)_x,(int)_y,(int)_z);
+		printf("%f\t%f\t%f\t\n",_x[0],_x[1],_x[2]);
+	
 	}
-	void print_f(){
-		printf("%f %f %f \n",_x,_y,_z);
+	float getx(size_t i){
+		return _x[i];
+	}
+	void setx(size_t i,float x){
+		_x[i]=x;
 	}
 private:
-	float _x,_y,_z;
+	float* _x;
 };
 
 class Color{
 public:
 	Color(){}
-	Color(float x,float y,float z):_x(x),_y(y),_z(z){
+	Color(float x,float y,float z){
+		_x = new float[3];
+		_x[0]=x;
+		_x[1]=y;
+		_x[2]=z;
 	}
 	void print(){
-		printf("%d\t%d\t%d\t\n",(int)_x,(int)_y,(int)_z);
+		printf("%f\t%f\t%f\t\n",_x[0],_x[1],_x[2]);
 	}
-	void print_f(){
-		printf("%f %f %f \n",_x,_y,_z);
+	float getx(size_t i){
+		return _x[i];
+	}
+	void setx(size_t i,float x){
+		_x[i]=x;
 	}
 private:
-	float _x,_y,_z;
+	float* _x;
 };
 
 class Triangle{
@@ -70,6 +86,9 @@ public:
 	}
 	void print(){
 		printf("%d\t%d\t%d\t\n",(int)_i[0],(int)_i[1],(int)_i[2]);
+	}
+	Vertex* getv(size_t i){
+		return _p[i];
 	}
 private:
 	Vertex** _p;
