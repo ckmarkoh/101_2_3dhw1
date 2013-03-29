@@ -94,5 +94,6 @@ private:
 	Vertex** _p;
 	size_t * _i;
 };
+
 #endif 
 

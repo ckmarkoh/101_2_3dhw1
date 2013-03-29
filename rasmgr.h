@@ -2,6 +2,9 @@
 #define RASMGR_H_
 #define IMG_SIZE 512
 #define IMG_DEPTH 256
+#define PI 3.14159265
+#define MARGIN 2
+#define ARC(x) (x*PI/180)
 #include<cstdio>
 #include<cstdlib>
 #include<iostream>
@@ -9,6 +12,8 @@
 #include<cassert>
 #include<vector>
 #include<string>
+#include <queue>
+#include <math.h>
 #include "rasterize.h"
 
 using namespace std;
@@ -42,7 +47,10 @@ public:
 	void parser(char * filename);
 	void whitespace(char str[]);
 	vector<string> parse_line(string line);
+	bool store_line(ifstream& myfile,queue<string>& q,size_t s);
+	string get_queue_front(queue<string>& q);
 	float* get_min_max();
+	void rotation(float i, float j, float k);
 	void normalize();
 	
 	void drawLine(Vertex* v1, Vertex* v2);

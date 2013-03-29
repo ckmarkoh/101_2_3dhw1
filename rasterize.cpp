@@ -4,12 +4,12 @@ using namespace std;
 
 int main (int argc, char *argv[]){
 	Rasmgr* rasmgr= new Rasmgr();	
-	if(argc>=3){
-		string temp(argv[2]);
-	}
+	
 	rasmgr->parser(argv[1]);
+	//rasmgr->debug();
+	
+	rasmgr->rotation(ARC(atoi(argv[2])),ARC(atoi(argv[3])),ARC(atoi(argv[4])));
 	rasmgr->normalize();
-	rasmgr->debug();
 	rasmgr->drawTriangle();
 	rasmgr->drawBitMap();
 	return 0;

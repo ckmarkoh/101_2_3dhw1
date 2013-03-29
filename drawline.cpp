@@ -17,15 +17,15 @@ void Rasmgr::drawTriangle(){
 	}
 }
 void Rasmgr::drawPoint(float xi,float yi,float zi){
-	assert( (xi>=0)&&(yi>=0)&&(zi>=0) );
 	unsigned tempz=(unsigned)((IMG_DEPTH-1+zi)/2);
 	int x=(int)xi;
 	int y=(int)yi;
 	//cout<<tempz<<" "<<xi<<" "<<yi<<endl;
 	//cout<<tempz<<" "<<x<<" "<<y<<endl;
 	//cout<<tempz<<" "<<(size_t)x<<" "<<(size_t)y<<endl;
-	if(tempz > _bitmap[(size_t)x][(size_t)y]){
-		_bitmap[(size_t)x][(size_t)y]=tempz;
+	//assert( (xi>=0)&&(yi>=0)&&(zi>=0) );
+	if(tempz > _bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN]){
+		_bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN]=tempz;
 	}
 }
 void Rasmgr::drawLine(Vertex* v1, Vertex* v2){
