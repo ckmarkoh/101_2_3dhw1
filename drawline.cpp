@@ -17,7 +17,7 @@ void Rasmgr::drawTriangle(){
 	}
 }
 void Rasmgr::drawPoint(float xi,float yi,float zi){
-	unsigned tempz=(unsigned)((IMG_DEPTH-1+zi)/2);
+	unsigned tempz=(unsigned)( ( (IMG_DEPTH-1)*COFFSET+zi*(100-COFFSET)   ) /100);
 	int x=(int)xi;
 	int y=(int)yi;
 	//cout<<tempz<<" "<<xi<<" "<<yi<<endl;

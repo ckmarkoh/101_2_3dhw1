@@ -45,6 +45,9 @@ public:
 	void setx(size_t i,float x){
 		_x[i]=x;
 	}
+	~Vertex(){
+		delete _x;
+	}
 private:
 	float* _x;
 };
@@ -67,6 +70,9 @@ public:
 	void setx(size_t i,float x){
 		_x[i]=x;
 	}
+	~Color(){
+		delete _x;
+	}
 private:
 	float* _x;
 };
@@ -85,10 +91,21 @@ public:
 		_i[2]=x2;
 	}
 	void print(){
-		printf("%d\t%d\t%d\t\n",(int)_i[0],(int)_i[1],(int)_i[2]);
+		//printf("%d\t%d\t%d\t\n",(int)_i[0],(int)_i[1],(int)_i[2]);
+
+		printf("%f\t%f\t%f\t\n",_p[0]->getx(1),_p[1]->getx(1),_p[2]->getx(1));
 	}
 	Vertex* getv(size_t i){
 		return _p[i];
+	}
+	void swap(size_t i,size_t j){
+		Vertex* p=_p[i];
+		_p[i]=_p[j];
+		_p[j]=p;
+	}
+	~Triangle(){
+		delete _p;
+		delete _i;
 	}
 private:
 	Vertex** _p;

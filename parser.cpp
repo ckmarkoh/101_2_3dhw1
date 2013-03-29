@@ -147,7 +147,7 @@ void Rasmgr::parser(char * filename){
 	else{
 		cout << "Unable to open file"; 
 	}
-
+	delete count_list;
 }
 void Rasmgr::debug(){
 	if(_vertex_list.size()>0){

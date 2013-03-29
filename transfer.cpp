@@ -96,7 +96,7 @@ void Rasmgr::normalize(){
 
 		}
 	}
-	
+	delete min_max;	
 //	debug();
 }
 
