@@ -116,8 +116,10 @@ void Rasmgr::drawLine(Vertex* v1, Vertex* v2){
 			assert(0);
 		}
 }
-void Rasmgr::drawBitMap(){
-ofstream fout("img.out");
+void Rasmgr::drawBitMap(char * filename){
+	string fname(filename);
+	fname+=".ppm";
+	ofstream fout(fname.c_str());
 	fout<<"P3"<<endl<<IMG_SIZE<<" "<<IMG_SIZE<<endl<<IMG_DEPTH<<endl;
 	for(size_t i=0;i<IMG_SIZE;i++){
 		for(size_t j=0;j<IMG_SIZE;j++){

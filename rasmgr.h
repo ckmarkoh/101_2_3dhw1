@@ -80,7 +80,7 @@ public:
 	float get_abs(float x);
 //	float get_max(float x,float y);
 	void drawPoint(float xi,float yi,float zi);
-	void drawBitMap();
+	void drawBitMap(char * filename);
 	void bfCulling();
 	void fillTriangle();
 	void fillOneTriangle(Triangle* t);
