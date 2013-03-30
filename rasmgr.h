@@ -2,7 +2,8 @@
 #define RASMGR_H_
 #define IMG_SIZE 512
 #define IMG_DEPTH 256
-#define COFFSET 20
+#define COFFSET 0.2
+#define CRATIO 0.5
 #define PI 3.14159265
 #define MARGIN 2
 #define ARC(x) (x*PI/180)

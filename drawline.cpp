@@ -18,7 +18,7 @@ void Rasmgr::drawTriangle(){
 	}
 }
 void Rasmgr::drawPoint(float xi,float yi,float zi){
-	unsigned tempz=(unsigned)( ( (IMG_DEPTH-1)*COFFSET+zi*(100-COFFSET)   ) /100);
+	unsigned tempz=(unsigned) ( (IMG_DEPTH-1)*COFFSET+zi*(1-COFFSET)   ) ;
 	int xC=(int)xi;
 	int yC=(int)yi;
 	if(tempz > _bitmap[(size_t)get_abs(xC)+MARGIN][(size_t)get_abs(yC)+MARGIN].z){
@@ -122,9 +122,9 @@ ofstream fout("img.out");
 	for(size_t i=0;i<IMG_SIZE;i++){
 		for(size_t j=0;j<IMG_SIZE;j++){
 			fout<<
-			int(_bitmap[i][j].r*_bitmap[i][j].z)<<" "<<
-			int(_bitmap[i][j].g*_bitmap[i][j].z)<<" "<<
-			int(_bitmap[i][j].b*_bitmap[i][j].z)<<"   ";			
+			int((_bitmap[i][j].r*CRATIO+(1-CRATIO))*_bitmap[i][j].z)<<" "<<
+			int((_bitmap[i][j].g*CRATIO+(1-CRATIO))*_bitmap[i][j].z)<<" "<<
+			int((_bitmap[i][j].b*CRATIO+(1-CRATIO))*_bitmap[i][j].z)<<"   ";			
 		}
 		fout<<endl;
 	}
