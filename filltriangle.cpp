@@ -1,4 +1,30 @@
 #include "rasmgr.h"
+void Rasmgr::bfCulling(){
+	vector<Triangle*> temp_list;
+	float *x = new float[3];
+	float *y = new float[3];
+	float *z = new float[3];
+
+	for(size_t i=0;i<_triangle_list.size();i++){
+		Triangle *t = _triangle_list[i];
+		for(size_t j=0;j<3;j++){
+			x[j]=t->getv(j)->getx(0);
+			y[j]=t->getv(j)->getx(1);
+			z[j]=t->getv(j)->getx(2);
+		}
+		float v1[]={	x[0]-x[1],y[0]-y[1],z[0]-z[1]	};
+		float v2[]={	x[2]-x[1],y[2]-y[1],z[2]-z[1]	};
+		if(v1[0]*v2[1]-v1[1]*v2[0]<0){
+			temp_list.push_back(t);
+		}
+	}
+	delete x;
+	delete y;
+	delete z;
+
+	_triangle_list=temp_list;
+}
+
 void Rasmgr::fillTriangle(){
 	for(size_t i=0;i<_triangle_list.size();i++){
 		fillOneTriangle(_triangle_list[i]);
@@ -6,6 +32,7 @@ void Rasmgr::fillTriangle(){
 }
 void Rasmgr::fillOneTriangle(Triangle* t){
 	sortVerticeY( t );
+	_triangle_current=t;
 	float *x = new float[3];
 	float *y = new float[3];
 	float *z = new float[3];
@@ -60,6 +87,7 @@ void Rasmgr::fillOneTriangle(Triangle* t){
 			ys=ys-1;
 		}
 	}
+
 }
 void Rasmgr::sortVerticeY(Triangle*t ){
    

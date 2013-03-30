@@ -20,12 +20,13 @@ void Rasmgr::drawPoint(float xi,float yi,float zi){
 	unsigned tempz=(unsigned)( ( (IMG_DEPTH-1)*COFFSET+zi*(100-COFFSET)   ) /100);
 	int x=(int)xi;
 	int y=(int)yi;
+
 	//cout<<tempz<<" "<<xi<<" "<<yi<<endl;
 	//cout<<tempz<<" "<<x<<" "<<y<<endl;
 	//cout<<tempz<<" "<<(size_t)x<<" "<<(size_t)y<<endl;
 	//assert( (xi>=0)&&(yi>=0)&&(zi>=0) );
-	if(tempz > _bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN]){
-		_bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN]=tempz;
+	if(tempz > _bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN].z){
+		_bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN].z=tempz;
 	}
 }
 void Rasmgr::drawLine(Vertex* v1, Vertex* v2){
@@ -92,7 +93,7 @@ ofstream fout("img.out");
 	fout<<"P3"<<endl<<IMG_SIZE<<" "<<IMG_SIZE<<endl<<IMG_DEPTH<<endl;
 	for(size_t i=0;i<IMG_SIZE;i++){
 		for(size_t j=0;j<IMG_SIZE;j++){
-			fout<<_bitmap[i][j]<<" "<<_bitmap[i][j]<<" "<<_bitmap[i][j]<<"   ";			
+			fout<<_bitmap[i][j].z<<" "<<_bitmap[i][j].z<<" "<<_bitmap[i][j].z<<"   ";			
 		}
 		fout<<endl;
 	}

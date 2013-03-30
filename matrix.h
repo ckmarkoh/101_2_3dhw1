@@ -1,3 +1,10 @@
+/****************************************************************************
+FileName     [ Matrix.h ]
+PackageName  [ HW1.2.P2 ]
+Synopsis     [ Class definitions for matrix in HW1.2 of DSnP class ]
+Author       [ Chung-Yang (Ric) Huang ]
+Copyright    [ Copyleft(c) 2010 LaDs(III), GIEE, NTU, Taiwan ]
+****************************************************************************/
 #ifndef MATRIX_H
 #define MATRIX_H
 #include <iostream>

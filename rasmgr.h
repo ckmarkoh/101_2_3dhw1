@@ -21,20 +21,32 @@ using namespace std;
 
 class Rasmgr{
 public:
+	struct BMPColor 
+	{
+		unsigned r;
+		unsigned g;
+		unsigned b;
+		unsigned z;
+	};
 	Rasmgr(){
-		_bitmap= new unsigned*[IMG_SIZE];
+		_bitmap= new BMPColor*[IMG_SIZE];
 		for(size_t i=0;i<IMG_SIZE;i++){
-			_bitmap[i]=new unsigned[IMG_SIZE];
+			_bitmap[i]=new BMPColor[IMG_SIZE];
 			for(size_t j=0;j<IMG_SIZE;j++){
-				_bitmap[i][j]=0;
+				_bitmap[i][j].r=0;
+				_bitmap[i][j].g=0;
+				_bitmap[i][j].b=0;
+				_bitmap[i][j].z=0;
 			}
 		}
+		_triangle_current=0;
 	}
 	~Rasmgr(){
 		for(size_t i=0;i<IMG_SIZE;i++){
 				delete _bitmap[i];
 		}
 		delete _bitmap;
+		delete _triangle_current;
 	}
 	enum READ_STATUS
 	{
@@ -49,6 +61,8 @@ public:
 		T_COLOR, 
 		T_TRIANGLE,
 	};
+
+
 
 	void debug();
 	void parser(char * filename);
@@ -66,13 +80,16 @@ public:
 //	float get_max(float x,float y);
 	void drawPoint(float xi,float yi,float zi);
 	void drawBitMap();
+	void bfCulling();
 	void fillTriangle();
 	void fillOneTriangle(Triangle* t);
 	void sortVerticeY(Triangle*t );
+	bool _fillcolor;
 private:
+	Triangle* _triangle_current;
 	vector<Vertex*> _vertex_list;
 	vector<Color*> _color_list;
 	vector<Triangle*> _triangle_list;
-	unsigned** _bitmap;
+	BMPColor** _bitmap;
 };
 #endif

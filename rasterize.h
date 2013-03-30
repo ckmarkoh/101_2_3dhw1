@@ -102,6 +102,9 @@ public:
 		Vertex* p=_p[i];
 		_p[i]=_p[j];
 		_p[j]=p;
+		size_t z=_i[i];
+		_i[i]=_i[j];
+		_i[j]=z;
 	}
 	~Triangle(){
 		delete _p;

@@ -10,8 +10,9 @@ int main (int argc, char *argv[]){
 	cout<<"xyzr: "<<xr<<","<<yr<<","<<zr<<","<<fill<<endl;
 	Rasmgr* rasmgr= new Rasmgr();	
 	
-	rasmgr->parser(argv[1]);
+	rasmgr->_fillcolor=fill;
 
+	rasmgr->parser(argv[1]);
 	//rasmgr->debug();
 	cout<<"rotation"<<endl;
 	rasmgr->rotation(ARC(xr),ARC(yr),ARC(zr));
@@ -21,7 +22,11 @@ int main (int argc, char *argv[]){
 
 	cout<<"drawTriangle"<<endl;
 	rasmgr->drawTriangle();
+	
+
 	if(fill){
+		cout<<"bfCulling"<<endl;
+		rasmgr->bfCulling();
 		cout<<"fillTriangle"<<endl;
 		rasmgr->fillTriangle();
 	}
