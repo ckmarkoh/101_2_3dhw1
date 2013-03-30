@@ -70,19 +70,28 @@ float* Rasmgr::get_min_max(){
 	return min_max;
 }
 
+
 void Rasmgr::normalize(){
 	float * min_max=get_min_max();
 	float xdist=0;
-	for(size_t i=0;i<2;i++){
-		float temp=min_max[i+3]-min_max[i];
-		if(min_max[i+3]-min_max[i]>xdist){
-			xdist=temp;
-		}
+	float tempx=min_max[3]-min_max[0];
+	float tempy=min_max[4]-min_max[1];
+	float movexy[]={0,0};
+	if(tempx>tempy){
+			xdist=tempx;
+			movexy[1]=(tempx-tempy)/2;
+	}
+	else if(tempy>tempx){
+			xdist=tempy;
+			movexy[0]=(tempy-tempx)/2;
+	}
+	else{
+			xdist=tempx;
 	}
 	float zdist=min_max[5]-min_max[2];
 	for(size_t i=0;i<_vertex_list.size();i++){
 		for(size_t j=0;j<2;j++){
-			float temp=(IMG_SIZE-MARGIN*2-1)*(_vertex_list[i]->getx(j)-min_max[j])/xdist;
+			float temp=(IMG_SIZE-MARGIN*2-1)*(_vertex_list[i]->getx(j)-min_max[j]+movexy[j])/xdist;
 			_vertex_list[i]->setx(j,temp);
 		}
 		size_t j=2;
@@ -96,6 +105,7 @@ void Rasmgr::normalize(){
 
 		}
 	}
+	
 	delete min_max;	
 //	debug();
 }

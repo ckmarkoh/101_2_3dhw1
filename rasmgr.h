@@ -23,19 +23,19 @@ class Rasmgr{
 public:
 	struct BMPColor 
 	{
-		unsigned r;
-		unsigned g;
-		unsigned b;
-		unsigned z;
+		float r;
+		float g;
+		float b;
+		float z;
 	};
 	Rasmgr(){
 		_bitmap= new BMPColor*[IMG_SIZE];
 		for(size_t i=0;i<IMG_SIZE;i++){
 			_bitmap[i]=new BMPColor[IMG_SIZE];
 			for(size_t j=0;j<IMG_SIZE;j++){
-				_bitmap[i][j].r=0;
-				_bitmap[i][j].g=0;
-				_bitmap[i][j].b=0;
+				_bitmap[i][j].r=1;
+				_bitmap[i][j].g=1;
+				_bitmap[i][j].b=1;
 				_bitmap[i][j].z=0;
 			}
 		}

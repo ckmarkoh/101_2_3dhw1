@@ -98,6 +98,10 @@ public:
 	Vertex* getv(size_t i){
 		return _p[i];
 	}
+	size_t geti(size_t i){
+		return _i[i];
+	}
+
 	void swap(size_t i,size_t j){
 		Vertex* p=_p[i];
 		_p[i]=_p[j];

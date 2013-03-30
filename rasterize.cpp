@@ -25,8 +25,8 @@ int main (int argc, char *argv[]){
 	
 
 	if(fill){
-		cout<<"bfCulling"<<endl;
-		rasmgr->bfCulling();
+//		cout<<"bfCulling"<<endl;
+//		rasmgr->bfCulling();
 		cout<<"fillTriangle"<<endl;
 		rasmgr->fillTriangle();
 	}

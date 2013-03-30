@@ -10,6 +10,7 @@ float Rasmgr::get_abs(float x){
 }
 void Rasmgr::drawTriangle(){
 	for(size_t i=0;i<_triangle_list.size();i++){
+		_triangle_current=_triangle_list[i];
 		//cout<<i<<endl;
 		drawLine(_triangle_list[i]->getv(0),_triangle_list[i]->getv(1));
 		drawLine(_triangle_list[i]->getv(1),_triangle_list[i]->getv(2));
@@ -18,16 +19,43 @@ void Rasmgr::drawTriangle(){
 }
 void Rasmgr::drawPoint(float xi,float yi,float zi){
 	unsigned tempz=(unsigned)( ( (IMG_DEPTH-1)*COFFSET+zi*(100-COFFSET)   ) /100);
-	int x=(int)xi;
-	int y=(int)yi;
-
+	int xC=(int)xi;
+	int yC=(int)yi;
+	if(tempz > _bitmap[(size_t)get_abs(xC)+MARGIN][(size_t)get_abs(yC)+MARGIN].z){
+		_bitmap[(size_t)get_abs(xC)+MARGIN][(size_t)get_abs(yC)+MARGIN].z=tempz;
+		if(_fillcolor){
+			assert(_triangle_current);
+			float r[]={0,0,0};
+			float g[]={0,0,0};
+			float b[]={0,0,0};
+			float x[]={0,0,0};
+			float y[]={0,0,0};
+			float z[]={0,0,0};
+			float d[]={0,0,0};
+			for(size_t i=0;i<3;i++){
+				assert(_triangle_current->geti(i)<_color_list.size());
+				float rtemp=_color_list[_triangle_current->geti(i)]->getx(0);
+				float gtemp=_color_list[_triangle_current->geti(i)]->getx(1);
+				float btemp=_color_list[_triangle_current->geti(i)]->getx(2);
+				float rgbtemp=rtemp+gtemp+btemp;
+				r[i]=rtemp/rgbtemp;
+				g[i]=gtemp/rgbtemp;
+				b[i]=btemp/rgbtemp;
+				x[i]=_triangle_current->getv(i)->getx(0);
+				y[i]=_triangle_current->getv(i)->getx(1);
+				z[i]=_triangle_current->getv(i)->getx(2);
+				d[i]=1/(sqrt(pow(x[i]-xi,2)+pow(y[i]-yi,2)+pow(z[i]-zi,2))+0.001);
+			}
+			_bitmap[(size_t)get_abs(xC)+MARGIN][(size_t)get_abs(yC)+MARGIN].r=(r[0]*d[0]+r[1]*d[1]+r[2]*d[2])/(d[0]+d[1]+d[2]);
+			_bitmap[(size_t)get_abs(xC)+MARGIN][(size_t)get_abs(yC)+MARGIN].g=(g[0]*d[0]+g[1]*d[1]+g[2]*d[2])/(d[0]+d[1]+d[2]);	
+			_bitmap[(size_t)get_abs(xC)+MARGIN][(size_t)get_abs(yC)+MARGIN].b=(b[0]*d[0]+b[1]*d[1]+b[2]*d[2])/(d[0]+d[1]+d[2]);	
+		}
+	}
 	//cout<<tempz<<" "<<xi<<" "<<yi<<endl;
 	//cout<<tempz<<" "<<x<<" "<<y<<endl;
 	//cout<<tempz<<" "<<(size_t)x<<" "<<(size_t)y<<endl;
 	//assert( (xi>=0)&&(yi>=0)&&(zi>=0) );
-	if(tempz > _bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN].z){
-		_bitmap[(size_t)get_abs(x)+MARGIN][(size_t)get_abs(y)+MARGIN].z=tempz;
-	}
+
 }
 void Rasmgr::drawLine(Vertex* v1, Vertex* v2){
 	float xd=v2->getx(0)-v1->getx(0);
@@ -93,7 +121,10 @@ ofstream fout("img.out");
 	fout<<"P3"<<endl<<IMG_SIZE<<" "<<IMG_SIZE<<endl<<IMG_DEPTH<<endl;
 	for(size_t i=0;i<IMG_SIZE;i++){
 		for(size_t j=0;j<IMG_SIZE;j++){
-			fout<<_bitmap[i][j].z<<" "<<_bitmap[i][j].z<<" "<<_bitmap[i][j].z<<"   ";			
+			fout<<
+			int(_bitmap[i][j].r*_bitmap[i][j].z)<<" "<<
+			int(_bitmap[i][j].g*_bitmap[i][j].z)<<" "<<
+			int(_bitmap[i][j].b*_bitmap[i][j].z)<<"   ";			
 		}
 		fout<<endl;
 	}

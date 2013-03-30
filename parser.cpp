@@ -147,6 +147,11 @@ void Rasmgr::parser(char * filename){
 	else{
 		cout << "Unable to open file"; 
 	}
+
+	if(_color_list.size()==0){
+		_fillcolor=false;
+	}
+
 	delete count_list;
 }
 void Rasmgr::debug(){
