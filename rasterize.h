@@ -92,7 +92,6 @@ public:
 	}
 	void print(){
 		//printf("%d\t%d\t%d\t\n",(int)_i[0],(int)_i[1],(int)_i[2]);
-
 		printf("%f\t%f\t%f\t\n",_p[0]->getx(1),_p[1]->getx(1),_p[2]->getx(1));
 	}
 	Vertex* getv(size_t i){
@@ -101,7 +100,6 @@ public:
 	size_t geti(size_t i){
 		return _i[i];
 	}
-
 	void swap(size_t i,size_t j){
 		Vertex* p=_p[i];
 		_p[i]=_p[j];
